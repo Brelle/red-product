@@ -1,0 +1,53 @@
+import { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import api from '../api/axios'
+
+export default function Login() {
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const [error, setError] = useState('')
+  const navigate = useNavigate()
+
+  const handleSubmit = async (e) => {
+  e.preventDefault()
+  const data = new FormData()
+  Object.entries(form).forEach(([key, value]) => {
+    if (value) data.append(key, value)
+  })
+  await api.post('products/', data)
+  setForm({ name: '', address: '', email: '', phone: '', price: '', currency: 'XOF', image: null })
+  setPreview(null)
+  setShowForm(false)
+  loadHotels()
+  }
+
+  return (
+    <div className="min-h-screen bg-[#2b2f38] flex items-center justify-center px-4">
+      <div className="bg-white rounded-lg shadow-lg w-full max-w-sm p-8">
+        <div className="flex items-center gap-2 justify-center mb-6 font-semibold text-lg">
+          <span className="text-red-500">▲</span> RED PRODUCT
+        </div>
+        <p className="text-sm text-gray-500 mb-6">Connectez-vous en tant qu'Admin</p>
+        {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
+        <form onSubmit={handleSubmit} className="space-y-5">
+          <input type="text" placeholder="Nom d'utilisateur" value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            className="w-full border-b border-gray-300 focus:border-gray-800 outline-none py-2 text-sm" required />
+          <input type="password" placeholder="Mot de passe" value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="w-full border-b border-gray-300 focus:border-gray-800 outline-none py-2 text-sm" required />
+          <label className="flex items-center gap-2 text-sm text-gray-500">
+            <input type="checkbox" /> Gardez-moi connecté
+          </label>
+          <button type="submit" className="w-full bg-[#2b2f38] text-white py-2.5 rounded-md text-sm font-medium">
+            Se connecter
+          </button>
+        </form>
+        <div className="text-center text-sm mt-4 space-y-1">
+          <p><Link to="/forgot-password" className="text-yellow-600">Mot de passe oublié?</Link></p>
+          <p className="text-gray-500">Vous n'avez pas de compte ? <Link to="/signup" className="text-yellow-600">S'inscrire</Link></p>
+        </div>
+      </div>
+    </div>
+  )
+}
