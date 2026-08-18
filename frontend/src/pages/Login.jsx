@@ -9,16 +9,16 @@ export default function Login() {
   const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
-  e.preventDefault()
-  const data = new FormData()
-  Object.entries(form).forEach(([key, value]) => {
-    if (value) data.append(key, value)
-  })
-  await api.post('products/', data)
-  setForm({ name: '', address: '', email: '', phone: '', price: '', currency: 'XOF', image: null })
-  setPreview(null)
-  setShowForm(false)
-  loadHotels()
+    e.preventDefault()
+    setError('')
+    try {
+      const res = await api.post('token/', { username, password })
+      localStorage.setItem('access_token', res.data.access)
+      localStorage.setItem('refresh_token', res.data.refresh)
+      navigate('/dashboard')
+    } catch (err) {
+      setError('Identifiants incorrects.')
+    }
   }
 
   return (
