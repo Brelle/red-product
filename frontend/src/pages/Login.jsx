@@ -40,7 +40,7 @@ export default function Login() {
             <input type="checkbox" /> Gardez-moi connecté
           </label>
           <button type="submit" className="w-full bg-[#2b2f38] text-white py-2.5 rounded-md text-sm font-medium">
-             TEST123
+             Se connecter
           </button>
         </form>
         <div className="text-center text-sm mt-4 space-y-1">
