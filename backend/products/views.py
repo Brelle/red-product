@@ -10,12 +10,15 @@ from django.core.mail import send_mail
 from django.conf import settings
 from .models import Product
 from .serializers import ProductSerializer
-
+from rest_framework_simplejwt.views import TokenObtainPairView
+from .serializers import EmailTokenObtainPairSerializer
 
 class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     permission_classes = [AllowAny]
+class EmailTokenObtainPairView(TokenObtainPairView):
+    serializer_class = EmailTokenObtainPairSerializer  
 
 
 @api_view(['POST'])
