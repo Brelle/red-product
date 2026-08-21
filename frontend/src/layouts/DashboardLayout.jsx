@@ -88,8 +88,8 @@ export default function DashboardLayout() {
           </div>
         </header>
 
-        {/* Content Pag<main className="flex-1 overflow-y-auto p-8 bg-[#f4f5f7]">e */}
-        
+                {/* Content Page */}
+        <main className="flex-1 overflow-y-auto p-8 bg-white/70 backdrop-blur-sm">
           <Outlet />
         </main>
       </div>
