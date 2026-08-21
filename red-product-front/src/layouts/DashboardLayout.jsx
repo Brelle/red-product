@@ -3,7 +3,7 @@ import { LayoutGrid, Building2, Search, Bell, LogOut } from 'lucide-react'
 
 export default function DashboardLayout() {
   return (
-    <div className="flex h-screen font-sans bg-cover bg-center" style={{ backgroundImage: "url('https://res.cloudinary.com/gwhpv6xz/image/upload/v1787306185/94c992138e12276ca66f489ef860cd3e376efe77.jpg')" }}>
+    <div className="flex h-screen bg-[#f4f5f7] font-sans">
       {/* Sidebar */}
       <aside className="w-64 bg-[#2b2f38] text-gray-300 flex flex-col justify-between">
         <div>
@@ -88,8 +88,8 @@ export default function DashboardLayout() {
           </div>
         </header>
 
-        {/* Content Pag<main className="flex-1 overflow-y-auto p-8 bg-[#f4f5f7]">e */}
-        
+        {/* Content Page */}
+        <main className="flex-1 overflow-y-auto p-8 bg-white/70 backdrop-blur-sm">
           <Outlet />
         </main>
       </div>
