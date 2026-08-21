@@ -37,7 +37,12 @@ export default function ResetPassword() {
   }
 
   return (
-    <div className="min-h-screen bg-[#2b2f38] flex items-center justify-center px-4">
+     <div
+         className="min-h-screen flex items-center justify-center px-4 bg-cover bg-center"
+         style={{
+       backgroundImage: "linear-gradient(rgba(20, 22, 28, 0.75), rgba(20, 22, 28, 0.75)), url('https://res.cloudinary.com/gwhpv6xz/image/upload/v1787306185/94c992138e12276ca66f489ef860cd3e376efe77.jpg')"
+       }}
+     >
       <div className="bg-white rounded-lg shadow-lg w-full max-w-sm p-8">
         <div className="flex items-center gap-2 justify-center mb-6 font-semibold text-lg">
           <span className="text-red-500">▲</span> RED PRODUCT
