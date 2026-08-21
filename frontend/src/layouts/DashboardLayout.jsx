@@ -1,12 +1,59 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Outlet, NavLink } from 'react-router-dom'
 import { LayoutGrid, Building2, Search, Bell, LogOut, Menu, X } from 'lucide-react'
+import api from '../api/axios'
+
+const DEFAULT_PHOTO = 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80'
 
 export default function DashboardLayout() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [photo, setPhoto] = useState(DEFAULT_PHOTO)
+  const [uploading, setUploading] = useState(false)
+  const fileInputRef = useRef(null)
+
+  useEffect(() => {
+    api.get('my-profile/')
+      .then((res) => {
+        if (res.data.photo) setPhoto(res.data.photo)
+      })
+      .catch(() => {})
+  }, [])
+
+  const handlePhotoClick = () => {
+    fileInputRef.current.click()
+  }
+
+  const handlePhotoChange = async (e) => {
+    const file = e.target.files[0]
+    if (!file) return
+
+    const formData = new FormData()
+    formData.append('photo', file)
+
+    setUploading(true)
+    try {
+      const res = await api.patch('my-profile/', formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      })
+      setPhoto(res.data.photo)
+    } catch (err) {
+      alert("Erreur lors de l'envoi de la photo.")
+    } finally {
+      setUploading(false)
+    }
+  }
 
   return (
     <div className="flex h-screen font-sans bg-cover bg-center relative" style={{ backgroundImage: "linear-gradient(rgba(20, 22, 28, 0.75), rgba(20, 22, 28, 0.75)), url('https://res.cloudinary.com/gwhpv6xz/image/upload/v1787306185/94c992138e12276ca66f489ef860cd3e376efe77.jpg')" }}>
+
+      {/* Input caché pour choisir le fichier */}
+      <input
+        type="file"
+        accept="image/*"
+        ref={fileInputRef}
+        onChange={handlePhotoChange}
+        className="hidden"
+      />
 
       {/* Overlay sombre sur mobile quand le menu est ouvert */}
       {sidebarOpen && (
@@ -60,12 +107,15 @@ export default function DashboardLayout() {
 
         {/* User Info Bottom */}
         <div className="p-4 border-t border-gray-700/50 flex items-center gap-3">
-          <div className="relative">
+          <div className="relative cursor-pointer group" onClick={handlePhotoClick}>
             <img
-              src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80"
+              src={photo}
               alt="Avatar"
               className="w-10 h-10 rounded-full object-cover"
             />
+            <div className="absolute inset-0 rounded-full bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-[9px] font-medium">
+              {uploading ? '...' : 'Changer'}
+            </div>
             <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 rounded-full border-2 border-[#2b2f38]" />
           </div>
           <div className="overflow-hidden">
@@ -101,9 +151,10 @@ export default function DashboardLayout() {
               </span>
             </div>
             <img
-              src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80"
+              src={photo}
               alt="Profile"
               className="w-9 h-9 rounded-full object-cover cursor-pointer"
+              onClick={handlePhotoClick}
             />
             <LogOut
               size={18} className="text-gray-500 cursor-pointer"
