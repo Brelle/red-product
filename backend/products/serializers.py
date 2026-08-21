@@ -38,3 +38,16 @@ class EmailTokenObtainPairSerializer(TokenObtainPairSerializer):
             'refresh': str(refresh),
             'access': str(refresh.access_token),
         }
+from .models import Profile
+
+
+class ProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Profile
+        fields = ['id', 'photo']
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        if instance.photo:
+            representation['photo'] = instance.photo.url
+        return representation

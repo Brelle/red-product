@@ -2,8 +2,8 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from rest_framework_simplejwt.views import TokenRefreshView
-from products.views import ProductViewSet, password_reset_request, password_reset_confirm, EmailTokenObtainPairView
-
+from products.views import ProductViewSet, password_reset_request, password_reset_confirm, EmailTokenObtainPairView, my_profile
+path('api/my-profile/', my_profile, name='my_profile'),
 router = DefaultRouter()
 router.register('products', ProductViewSet)
 

@@ -12,6 +12,7 @@ from .models import Product
 from .serializers import ProductSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 from .serializers import EmailTokenObtainPairSerializer
+from rest_framework.parsers import MultiPartParser, FormParser
 
 class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
@@ -62,3 +63,24 @@ def password_reset_confirm(request):
     user.set_password(new_password)
     user.save()
     return Response({'detail': 'Mot de passe réinitialisé avec succès.'})
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.parsers import MultiPartParser, FormParser
+from .models import Profile
+from .serializers import ProfileSerializer
+
+
+@api_view(['GET', 'PATCH'])
+@permission_classes([IsAuthenticated])
+def my_profile(request):
+    profile, created = Profile.objects.get_or_create(user=request.user)
+
+    if request.method == 'GET':
+        serializer = ProfileSerializer(profile)
+        return Response(serializer.data)
+
+    if request.method == 'PATCH':
+        serializer = ProfileSerializer(profile, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=400)
