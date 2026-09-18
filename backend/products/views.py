@@ -1,25 +1,5 @@
-@api_view(['GET'])
-@permission_classes([AllowAny])
-def reparer_admin(request):
-    email = "moueleyembi@gmail.com"
-    password = "Brelle2006"
-
-    user, created = User.objects.get_or_create(email=email, defaults={"username": email})
-    user.username = email
-    user.set_password(password)
-    user.is_staff = True
-    user.is_superuser = True
-    user.is_active = True
-    user.save()
-
-    return Response({
-        "statut": "ok",
-        "compte_cree": created,
-        "username_final": user.username,
-        "email_final": user.email,
-    })
 from rest_framework import viewsets
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from django.contrib.auth.models import User
@@ -28,18 +8,20 @@ from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.core.mail import send_mail
 from django.conf import settings
-from .models import Product
-from .serializers import ProductSerializer
+from .models import Product, Profile
+from .serializers import ProductSerializer, EmailTokenObtainPairSerializer, ProfileSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
-from .serializers import EmailTokenObtainPairSerializer
 from rest_framework.parsers import MultiPartParser, FormParser
+
 
 class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     permission_classes = [AllowAny]
+
+
 class EmailTokenObtainPairView(TokenObtainPairView):
-    serializer_class = EmailTokenObtainPairSerializer  
+    serializer_class = EmailTokenObtainPairSerializer
 
 
 @api_view(['POST'])
@@ -83,10 +65,6 @@ def password_reset_confirm(request):
     user.set_password(new_password)
     user.save()
     return Response({'detail': 'Mot de passe réinitialisé avec succès.'})
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.parsers import MultiPartParser, FormParser
-from .models import Profile
-from .serializers import ProfileSerializer
 
 
 @api_view(['GET', 'PATCH'])
@@ -104,3 +82,25 @@ def my_profile(request):
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=400)
+
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def reparer_admin(request):
+    email = "moueleyembi@gmail.com"
+    password = "Brelle2006"
+
+    user, created = User.objects.get_or_create(email=email, defaults={"username": email})
+    user.username = email
+    user.set_password(password)
+    user.is_staff = True
+    user.is_superuser = True
+    user.is_active = True
+    user.save()
+
+    return Response({
+        "statut": "ok",
+        "compte_cree": created,
+        "username_final": user.username,
+        "email_final": user.email,
+    })
