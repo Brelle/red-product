@@ -7,6 +7,7 @@ import DashboardLayout from './layouts/DashboardLayout'
 import Dashboard from './pages/Dashboard'
 import HotelList from './pages/HotelList'
 import RequireAuth from './components/RequireAuth'
+import { Toaster } from 'react-hot-toast'
 
 export default function App() {
   return (

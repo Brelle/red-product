@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import toast from 'react-hot-toast'
 import api from '../api/axios'
 
 export default function Login() {
@@ -11,13 +12,16 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     setError('')
+    const loadingToast = toast.loading('Connexion en cours...')
     try {
       const res = await api.post('token/', { email, password })
       localStorage.setItem('access_token', res.data.access)
       localStorage.setItem('refresh_token', res.data.refresh)
+      toast.success('Connecté avec succès !', { id: loadingToast })
       navigate('/dashboard')
     } catch (err) {
       setError('Identifiants incorrects.')
+      toast.error('Identifiants incorrects.', { id: loadingToast })
     }
   }
 
