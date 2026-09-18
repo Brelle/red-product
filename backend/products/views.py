@@ -104,3 +104,18 @@ def reparer_admin(request):
         "username_final": user.username,
         "email_final": user.email,
     })
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def register(request):
+    name = request.data.get('name')
+    email = request.data.get('email')
+    password = request.data.get('password')
+
+    if not email or not password:
+        return Response({'detail': 'Email et mot de passe requis.'}, status=400)
+
+    if User.objects.filter(email=email).exists():
+        return Response({'detail': 'Un compte existe déjà avec cet email.'}, status=400)
+
+    user = User.objects.create_user(username=email, email=email, password=password, first_name=name or '')
+    return Response({'detail': 'Compte créé avec succès.'}, status=201)
