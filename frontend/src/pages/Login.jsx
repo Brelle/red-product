@@ -7,11 +7,13 @@ export default function Login() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     setError('')
+    setLoading(true)
     const loadingToast = toast.loading('Connexion en cours...')
     try {
       const res = await api.post('token/', { email, password })
@@ -22,6 +24,8 @@ export default function Login() {
     } catch (err) {
       setError('Identifiants incorrects.')
       toast.error('Identifiants incorrects.', { id: loadingToast })
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -48,8 +52,15 @@ export default function Login() {
           <label className="flex items-center gap-2 text-sm text-gray-500">
             <input type="checkbox" /> Gardez-moi connecté
           </label>
-          <button type="submit" className="w-full bg-[#2b2f38] text-white py-2.5 rounded-md text-sm font-medium">
-            Se connecter
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full bg-[#2b2f38] text-white py-2.5 rounded-md text-sm font-medium disabled:opacity-60 flex items-center justify-center gap-2"
+          >
+            {loading && (
+              <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+            )}
+            {loading ? 'Connexion en cours...' : 'Se connecter'}
           </button>
         </form>
         <div className="text-center text-sm mt-4 space-y-1">
