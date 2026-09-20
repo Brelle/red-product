@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react'
 import { Plus, X, ImagePlus, ArrowLeft } from 'lucide-react'
+import toast from 'react-hot-toast'
 import api from '../api/axios'
 
 export default function HotelList() {
   const [hotels, setHotels] = useState([])
   const [showForm, setShowForm] = useState(false)
   const [preview, setPreview] = useState(null)
+  const [loading, setLoading] = useState(false)
   const [form, setForm] = useState({
     name: '', address: '', email: '', phone: '', price: '', currency: 'XOF', image: null,
   })
@@ -27,17 +29,27 @@ export default function HotelList() {
   }
 
   const handleSubmit = async (e) => {
-  e.preventDefault()
-  const data = new FormData()
-  Object.entries(form).forEach(([key, value]) => {
-    if (value) data.append(key, value)
-  })
-  await api.post('products/', data)
-  setForm({ name: '', address: '', email: '', phone: '', price: '', currency: 'XOF', image: null })
-  setPreview(null)
-  setShowForm(false)
-  loadHotels()
-}
+    e.preventDefault()
+    setLoading(true)
+    const loadingToast = toast.loading('Enregistrement de l\'hôtel...')
+    try {
+      const data = new FormData()
+      Object.entries(form).forEach(([key, value]) => {
+        if (value) data.append(key, value)
+      })
+      await api.post('products/', data)
+      toast.success('Hôtel créé avec succès !', { id: loadingToast })
+      setForm({ name: '', address: '', email: '', phone: '', price: '', currency: 'XOF', image: null })
+      setPreview(null)
+      setShowForm(false)
+      loadHotels()
+    } catch (err) {
+      toast.error('Erreur lors de la création de l\'hôtel.', { id: loadingToast })
+    } finally {
+      setLoading(false)
+    }
+  }
+
   if (showForm) {
     return (
       <div className="bg-white rounded-lg p-6 max-w-3xl">
@@ -94,8 +106,15 @@ export default function HotelList() {
             </label>
           </div>
           <div className="col-span-2 flex justify-end">
-            <button type="submit" className="bg-gray-800 text-white text-sm px-6 py-2.5 rounded-md">
-              Enregistrer
+            <button
+              type="submit"
+              disabled={loading}
+              className="bg-gray-800 text-white text-sm px-6 py-2.5 rounded-md disabled:opacity-60 flex items-center justify-center gap-2"
+            >
+              {loading && (
+                <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+              )}
+              {loading ? 'Enregistrement...' : 'Enregistrer'}
             </button>
           </div>
         </form>
