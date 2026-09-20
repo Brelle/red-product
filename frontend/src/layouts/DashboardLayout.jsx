@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { Outlet, NavLink } from 'react-router-dom'
-import { LayoutGrid, Building2, Search, Bell, LogOut, Menu, X } from 'lucide-react'
+import { LayoutGrid, Building2, Search, Bell, LogOut, Menu, X, Origami } from 'lucide-react'
 import api from '../api/axios'
 
 const DEFAULT_PHOTO = 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80'
@@ -70,9 +70,9 @@ export default function DashboardLayout() {
         } md:translate-x-0`}
       >
         <div>
-          <div className="p-6 flex items-center justify-between gap-2 text-white font-bold text-lg tracking-wide border-b border-gray-700/50">
+          <div className="p-6 flex items-center justify-between gap-2 text-white font-medium text-lg tracking-wide border-b border-gray-700/50">
             <span className="flex items-center gap-2">
-              <span className="text-white text-xl font-black">▲</span> RED PRODUCT
+              <Origami size={20} strokeWidth={1.5} /> RED PRODUCT
             </span>
             <button className="md:hidden text-gray-400" onClick={() => setSidebarOpen(false)}>
               <X size={20} />
