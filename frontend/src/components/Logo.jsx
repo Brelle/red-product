@@ -1,4 +1,4 @@
-export default function Logo({ size = 20, className = '' }) {
+export default function Logo({ size = 20, colorLeft = '#9CA3AF', colorRight = 'white', className = '' }) {
   return (
     <svg
       width={size}
@@ -7,8 +7,10 @@ export default function Logo({ size = 20, className = '' }) {
       className={className}
       xmlns="http://www.w3.org/2000/svg"
     >
-      <path d="M12 2 L22 12 L12 22 L2 12 Z" fill="white" />
-      <path d="M2 12 L12 22 L2 22 Z" fill="white" fillOpacity="0.55" />
+      {/* Moitié gauche (plus sombre) */}
+      <path d="M4 3 H12 V21 L4 9 Z" fill={colorLeft} />
+      {/* Moitié droite (plus claire) */}
+      <path d="M12 3 H20 V9 L12 21 Z" fill={colorRight} />
     </svg>
   )
 }
