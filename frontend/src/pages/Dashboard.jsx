@@ -12,22 +12,22 @@ const stats = [
 export default function Dashboard() {
   return (
     <div>
-      <div className="mb-6">
-        <h2 className="text-2xl font-normal text-gray-800">Bienvenue sur RED Product</h2>
-        <p className="text-gray-500 text-sm mt-1">Lorem ipsum dolor sit amet consectetur</p>
+      <div className="mb-4">
+        <h2 className="text-xl font-normal text-gray-800">Bienvenue sur RED Product</h2>
+        <p className="text-gray-500 text-xs mt-0.5">Lorem ipsum dolor sit amet consectetur</p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {stats.map(({ label, count, note, color, icon: Icon }) => (
-          <div key={label} className="bg-white rounded-lg p-5 shadow-sm border border-gray-100 flex items-center gap-4">
-            <div className={`w-12 h-12 rounded-full ${color} text-white flex items-center justify-center shrink-0`}>
-              <Icon size={22} />
+          <div key={label} className="bg-white rounded-lg p-3 shadow-sm border border-gray-100 flex items-center gap-3">
+            <div className={`w-9 h-9 rounded-full ${color} text-white flex items-center justify-center shrink-0`}>
+              <Icon size={16} />
             </div>
             <div>
-              <p className="text-lg font-semibold text-gray-800">
-                {count} <span className="font-normal text-gray-600">{label}</span>
+              <p className="text-sm font-semibold text-gray-800">
+                {count} <span className="font-normal text-gray-600 text-xs">{label}</span>
               </p>
-              <p className="text-xs text-gray-400 mt-0.5">{note}</p>
+              <p className="text-[11px] text-gray-400 mt-0.5">{note}</p>
             </div>
           </div>
         ))}
