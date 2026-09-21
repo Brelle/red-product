@@ -154,9 +154,9 @@ export default function HotelList() {
     <div>
       <div className="flex items-center justify-between mb-4">
         <div>
-          <h1 className="text-xl font-semibold">Liste des hôtels</h1>
-          <p className="text-sm text-gray-400">Hôtels <span className="text-gray-500">{hotels.length}</span></p>
-        </div>
+  <h1 className="text-xl font-semibold pb-3 border-b border-gray-200">Liste des hôtels</h1>
+  <p className="text-2xl text-gray-800 mt-3">Hôtels <span className="text-gray-400">{hotels.length}</span></p>
+</div>
         <button
           onClick={() => setShowForm(true)}
           className="flex items-center gap-2 bg-white text-gray-800 border border-gray-300 text-sm px-4 py-2 rounded-md"
