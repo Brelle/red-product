@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Plus, X, ImagePlus, ArrowLeft } from 'lucide-react'
+import { Plus, ImagePlus, ArrowLeft } from 'lucide-react'
 import toast from 'react-hot-toast'
 import api from '../api/axios'
 
@@ -53,9 +53,12 @@ export default function HotelList() {
   if (showForm) {
     return (
       <div className="bg-white rounded-lg p-6 max-w-3xl">
-        <button onClick={() => setShowForm(false)} className="flex items-center gap-2 text-xs font-semibold tracking-wider uppercase text-gray-500 mb-4 pb-4 border-b border-dashed border-gray-300 w-full">
-  <ArrowLeft size={16} /> Créer un nouvel hôtel
-</button>
+        <button
+          onClick={() => setShowForm(false)}
+          className="flex items-center gap-2 text-xs font-semibold tracking-wider uppercase text-gray-500 mb-6 pb-4 border-b border-dashed border-gray-300 w-full"
+        >
+          <ArrowLeft size={16} /> Créer un nouvel hôtel
+        </button>
         <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-x-6 gap-y-4">
           <div>
             <label className="text-sm text-gray-500">Nom de l'hôtel</label>
@@ -129,30 +132,33 @@ export default function HotelList() {
           <h1 className="text-xl font-semibold">Liste des hôtels</h1>
           <p className="text-sm text-gray-400">Hôtels <span className="text-gray-500">{hotels.length}</span></p>
         </div>
-        <button onClick={() => setShowForm(true)} className="flex items-center gap-2 bg-gray-800 text-white text-sm px-4 py-2 rounded-md">
+        <button
+          onClick={() => setShowForm(true)}
+          className="flex items-center gap-2 bg-white text-gray-800 border border-gray-300 text-sm px-4 py-2 rounded-md"
+        >
           <Plus size={16} /> Créer un nouvel hôtel
         </button>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-  {hotels.map((hotel) => (
-    <div key={hotel.id} className="bg-white rounded-lg shadow-sm overflow-hidden">
-      {hotel.image ? (
-        <img src={hotel.image} alt={hotel.name} className="w-full h-36 object-cover" />
-      ) : (
-        <div className="w-full h-36 bg-gray-200 flex items-center justify-center text-gray-400 text-sm">
-          Pas de photo
-        </div>
-      )}
-      <div className="p-3">
-        <p className="text-xs text-red-500">{hotel.address || 'Adresse non renseignée'}</p>
-        <p className="font-medium">{hotel.name}</p>
-        <p className="text-xs text-gray-400">
-          {Math.round(hotel.price).toLocaleString('fr-FR').replace(/\s/g, '.')} {hotel.currency} par nuit
-        </p>
+        {hotels.map((hotel) => (
+          <div key={hotel.id} className="bg-white rounded-lg shadow-sm overflow-hidden">
+            {hotel.image ? (
+              <img src={hotel.image} alt={hotel.name} className="w-full h-36 object-cover" />
+            ) : (
+              <div className="w-full h-36 bg-gray-200 flex items-center justify-center text-gray-400 text-sm">
+                Pas de photo
+              </div>
+            )}
+            <div className="p-3">
+              <p className="text-xs text-red-500">{hotel.address || 'Adresse non renseignée'}</p>
+              <p className="font-medium">{hotel.name}</p>
+              <p className="text-xs text-gray-400">
+                {Math.round(hotel.price).toLocaleString('fr-FR').replace(/\s/g, '.')} {hotel.currency} par nuit
+              </p>
+            </div>
+          </div>
+        ))}
       </div>
-    </div>
-  ))}
-</div>
     </div>
   )
 }

@@ -16,7 +16,6 @@ export default function Dashboard() {
         <h2 className="text-xl font-normal text-gray-800">Bienvenue sur RED Product</h2>
         <p className="text-gray-500 text-xs mt-0.5">Lorem ipsum dolor sit amet consectetur</p>
       </div>
-
       <div className="px-4 md:px-8 pb-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {stats.map(({ label, count, note, color, icon: Icon }) => (
