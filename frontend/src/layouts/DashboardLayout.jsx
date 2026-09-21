@@ -72,10 +72,10 @@ export default function DashboardLayout() {
         <div>
           <div className="p-6 flex items-center justify-between gap-2 text-white font-medium text-lg tracking-wide border-b border-gray-700/50">
             <span className="flex items-center gap-2">
-             <Logo size={20} colorLeft="#374151" colorRight="#111827" />RED PRODUCT
+             <Logo size={28} colorLeft="#374151" colorRight="#111827" />RED PRODUCT
             </span>
             <button className="md:hidden text-gray-400" onClick={() => setSidebarOpen(false)}>
-              <X size={20} />
+              <X size={28} />
             </button>
           </div>
           <p className="px-6 text-[11px] uppercase tracking-wider text-gray-400 mt-6 mb-3 font-medium">Principal</p>
@@ -145,7 +145,7 @@ export default function DashboardLayout() {
               />
             </div>
             <div className="relative cursor-pointer">
-              <Bell size={20} className="text-gray-600" />
+              <Bell size={28} className="text-gray-600" />
               <span className="absolute -top-1.5 -right-1.5 bg-red-500 text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
                 3
               </span>

@@ -67,7 +67,7 @@ export default function DashboardLayout() {
               />
             </div>
             <div className="relative cursor-pointer">
-              <Bell size={20} className="text-gray-600" />
+              <Bell size={28} className="text-gray-600" />
               <span className="absolute -top-1.5 -right-1.5 bg-red-500 text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
                 3
               </span>
