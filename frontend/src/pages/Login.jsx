@@ -38,7 +38,7 @@ export default function Login() {
        }}
     >
       <div className="bg-white rounded-lg shadow-lg w-full max-w-sm p-8">
-        <div className="flex items-center gap-2 justify-center mb-6 font-medium text-lg">
+        <div className="flex items-center gap-3 justify-center mb-8 font-semibold text-lg tracking-wide">
           <Logo size={28} variant="light" />
           <span>RED PRODUCT</span>
         </div>
