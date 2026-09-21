@@ -39,7 +39,8 @@ export default function Login() {
     >
       <div className="bg-white rounded-lg shadow-lg w-full max-w-sm p-8">
         <div className="flex items-center gap-2 justify-center mb-6 font-medium text-lg">
-          <Logo size={28} variant="light" RED PRODUCT
+          <Logo size={28} variant="brand" />
+          <span>RED PRODUCT</span>
         </div>
         <p className="text-sm text-gray-500 mb-6">Connectez-vous en tant qu'Admin</p>
         {error && <p className="text-red-500 text-sm mb-4">{error}</p>}

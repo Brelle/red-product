@@ -46,7 +46,7 @@ export default function Signup() {
      >
       <div className="bg-white rounded-lg shadow-lg w-full max-w-sm p-8">
         <div className="flex items-center gap-2 justify-center mb-6 font-medium text-lg">
-          <Logo size={28} variant="light" /> RED PRODUCT
+          <Logo size={28} variant="brand" /> RED PRODUCT
         </div>
         <p className="text-sm text-gray-500 mb-6">Inscrivez-vous en tant qu'Admin</p>
         {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
