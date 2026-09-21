@@ -48,9 +48,8 @@ export default function DashboardLayout() {
   const pageTitle = location.pathname === '/hotels' ? 'Liste des hôtels' : 'Dashboard'
 
   return (
-    <div className="flex h-screen font-sans bg-cover bg-center relative" style={{ backgroundImage: "linear-gradient(rgba(20, 22, 28, 0.75), rgba(20, 22, 28, 0.75)), url('https://res.cloudinary.com/gwhpv6xz/image/upload/v1787306185/94c992138e12276ca66f489ef860cd3e376efe77.jpg')" }}>
+    <div className="flex h-screen font-sans relative">
 
-      {/* Input caché pour choisir le fichier */}
       <input
         type="file"
         accept="image/*"
@@ -59,7 +58,6 @@ export default function DashboardLayout() {
         className="hidden"
       />
 
-      {/* Overlay sombre sur mobile quand le menu est ouvert */}
       {sidebarOpen && (
         <div
           className="fixed inset-0 bg-black/50 z-30 md:hidden"
@@ -109,7 +107,6 @@ export default function DashboardLayout() {
           </nav>
         </div>
 
-        {/* User Info Bottom */}
         <div className="p-4 border-t border-gray-700/50 flex items-center gap-3">
           <div className="relative cursor-pointer group" onClick={handlePhotoClick}>
             <img
@@ -130,8 +127,7 @@ export default function DashboardLayout() {
       </aside>
 
       {/* Main Content Area */}
-      <div className="flex-1 flex flex-col overflow-hidden w-full">
-        {/* Header */}
+      <div className="flex-1 flex flex-col overflow-hidden w-full bg-gray-100">
         <header className="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-4 md:px-8 shadow-sm">
           <div className="flex items-center gap-3">
             <button className="md:hidden text-gray-600" onClick={() => setSidebarOpen(true)}>
@@ -171,8 +167,7 @@ export default function DashboardLayout() {
           </div>
         </header>
 
-        {/* Content Page */}
-        <main className="flex-1 overflow-y-auto p-4 md:p-8 bg-white/70 backdrop-blur-sm">
+        <main className="flex-1 overflow-y-auto p-4 md:p-8">
           <Outlet />
         </main>
       </div>
