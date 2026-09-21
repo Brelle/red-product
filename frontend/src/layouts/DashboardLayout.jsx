@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
-import { Outlet, NavLink } from 'react-router-dom'
-import { LayoutGrid, Building2, Search, Bell, LogOut, Menu, X, Origami } from 'lucide-react'
+import { Outlet, NavLink, useLocation } from 'react-router-dom'
+import { LayoutGrid, Building2, Search, Bell, LogOut, Menu, X } from 'lucide-react'
 import Logo from '../components/Logo'
 import api from '../api/axios'
 
@@ -8,10 +8,10 @@ const DEFAULT_PHOTO = 'https://images.unsplash.com/photo-1534528741775-53994a69d
 
 export default function DashboardLayout() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
-  const location = useLocation()
   const [photo, setPhoto] = useState(DEFAULT_PHOTO)
   const [uploading, setUploading] = useState(false)
   const fileInputRef = useRef(null)
+  const location = useLocation()
 
   useEffect(() => {
     api.get('my-profile/')
@@ -45,6 +45,8 @@ export default function DashboardLayout() {
     }
   }
 
+  const pageTitle = location.pathname === '/hotels' ? 'Liste des hôtels' : 'Dashboard'
+
   return (
     <div className="flex h-screen font-sans bg-cover bg-center relative" style={{ backgroundImage: "linear-gradient(rgba(20, 22, 28, 0.75), rgba(20, 22, 28, 0.75)), url('https://res.cloudinary.com/gwhpv6xz/image/upload/v1787306185/94c992138e12276ca66f489ef860cd3e376efe77.jpg')" }}>
 
@@ -74,10 +76,10 @@ export default function DashboardLayout() {
         <div>
           <div className="p-6 flex items-center justify-between gap-2 text-white font-medium text-lg tracking-wide border-b border-gray-700/50">
             <span className="flex items-center gap-2">
-            <Logo size={28} variant="light" /> RED PRODUCT
+              <Logo size={28} variant="light" /> RED PRODUCT
             </span>
             <button className="md:hidden text-gray-400" onClick={() => setSidebarOpen(false)}>
-              <X size={28} />
+              <X size={20} />
             </button>
           </div>
           <p className="px-6 text-[11px] uppercase tracking-wider text-gray-400 mt-6 mb-3 font-medium">Principal</p>
@@ -135,9 +137,7 @@ export default function DashboardLayout() {
             <button className="md:hidden text-gray-600" onClick={() => setSidebarOpen(true)}>
               <Menu size={22} />
             </button>
-            <h1 className="text-lg md:text-xl font-bold text-gray-800">
-  {location.pathname === '/hotels' ? 'Liste des hôtels' : 'Dashboard'}
-</h1>
+            <h1 className="text-lg md:text-xl font-bold text-gray-800">{pageTitle}</h1>
           </div>
           <div className="flex items-center gap-3 md:gap-6">
             <div className="hidden sm:flex items-center gap-2 text-gray-400 bg-gray-100 rounded-full px-4 py-2 w-40 md:w-72 focus-within:ring-2 focus-within:ring-gray-300">
@@ -149,7 +149,7 @@ export default function DashboardLayout() {
               />
             </div>
             <div className="relative cursor-pointer">
-              <Bell size={28} className="text-gray-600" />
+              <Bell size={20} className="text-gray-600" />
               <span className="absolute -top-1.5 -right-1.5 bg-red-500 text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
                 3
               </span>
