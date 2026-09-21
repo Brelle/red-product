@@ -22,6 +22,16 @@ export default function HotelList() {
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value })
 
+  const handlePhoneChange = (e) => {
+    const digitsOnly = e.target.value.replace(/\D/g, '')
+    setForm({ ...form, phone: digitsOnly })
+  }
+
+  const handlePriceChange = (e) => {
+    const digitsOnly = e.target.value.replace(/\D/g, '')
+    setForm({ ...form, price: digitsOnly })
+  }
+
   const handleImageChange = (e) => {
     const file = e.target.files[0]
     setForm({ ...form, image: file })
@@ -77,13 +87,28 @@ export default function HotelList() {
           </div>
           <div>
             <label className="text-sm text-gray-500">Numéro de téléphone</label>
-            <input name="phone" value={form.phone} onChange={handleChange}
-              className="w-full border rounded-md px-3 py-2 text-sm mt-1" />
+            <input
+              name="phone"
+              type="text"
+              inputMode="numeric"
+              pattern="[0-9]*"
+              value={form.phone}
+              onChange={handlePhoneChange}
+              className="w-full border rounded-md px-3 py-2 text-sm mt-1"
+            />
           </div>
           <div>
             <label className="text-sm text-gray-500">Prix par nuit</label>
-            <input name="price" type="number" value={form.price} onChange={handleChange} required
-              className="w-full border rounded-md px-3 py-2 text-sm mt-1" />
+            <input
+              name="price"
+              type="text"
+              inputMode="numeric"
+              pattern="[0-9]*"
+              value={form.price}
+              onChange={handlePriceChange}
+              required
+              className="w-full border rounded-md px-3 py-2 text-sm mt-1"
+            />
           </div>
           <div>
             <label className="text-sm text-gray-500">Devise</label>
