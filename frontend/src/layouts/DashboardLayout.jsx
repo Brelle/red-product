@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { Outlet, NavLink } from 'react-router-dom'
 import { LayoutGrid, Building2, Search, Bell, LogOut, Menu, X, Origami } from 'lucide-react'
+import Logo from '../components/Logo'
 import api from '../api/axios'
 
 const DEFAULT_PHOTO = 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80'
