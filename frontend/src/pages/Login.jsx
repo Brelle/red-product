@@ -39,8 +39,7 @@ export default function Login() {
     >
       <div className="bg-white rounded-lg shadow-lg w-full max-w-sm p-8">
         <div className="flex items-center gap-3 justify-center mb-8 font-semibold text-lg tracking-wide">
-          <Logo size={28} variant="light" />
-          <span>RED PRODUCT</span>
+          <Logo size={28} variant="light" /> RED PRODUCT
         </div>
         <p className="text-sm text-gray-500 mb-6">Connectez-vous en tant qu'Admin</p>
         {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
@@ -50,7 +49,7 @@ export default function Login() {
             className="w-full border-0 border-b border-gray-300 focus:border-gray-800 outline-none py-2 text-sm" required />
           <input type="password" placeholder="Mot de passe" value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full border-b border-gray-300 focus:border-gray-800 outline-none py-2 text-sm" required />
+            className="w-full border-0 border-b border-gray-300 focus:border-gray-800 outline-none py-2 text-sm" required />
           <label className="flex items-center gap-2 text-sm text-gray-500">
             <input type="checkbox" /> Gardez-moi connecté
           </label>
