@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast'
-import Logo from 'lucide-react'
+import Logo from '../components/Logo'
 import api from '../api/axios'
 
 export default function Signup() {

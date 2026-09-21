@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import Logo from 'lucide-react'
+import Logo from '../components/Logo'
 import api from '../api/axios'
 
 export default function ForgotPassword() {
