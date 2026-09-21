@@ -152,17 +152,14 @@ export default function HotelList() {
 
   return (
     <div>
-      <div className="mb-6">
-        <h1 className="text-xl font-semibold pb-3 border-b border-gray-200">Liste des hôtels</h1>
-        <div className="flex items-center justify-between mt-3">
-          <p className="text-2xl text-gray-800">Hôtels <span className="text-gray-400">{hotels.length}</span></p>
-          <button
-            onClick={() => setShowForm(true)}
-            className="flex items-center gap-2 bg-white text-gray-800 border border-gray-300 text-sm px-4 py-2 rounded-md"
-          >
-            <Plus size={16} /> Créer un nouvel hôtel
-          </button>
-        </div>
+      <div className="flex items-center justify-between mb-6">
+        <p className="text-2xl text-gray-800">Hôtels <span className="text-gray-400">{hotels.length}</span></p>
+        <button
+          onClick={() => setShowForm(true)}
+          className="flex items-center gap-2 bg-white text-gray-800 border border-gray-300 text-sm px-4 py-2 rounded-md"
+        >
+          <Plus size={16} /> Créer un nouvel hôtel
+        </button>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
         {hotels.map((hotel) => (
