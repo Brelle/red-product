@@ -73,7 +73,7 @@ export default function DashboardLayout() {
         <div>
           <div className="p-6 flex items-center justify-between gap-2 text-white font-medium text-lg tracking-wide border-b border-gray-700/50">
             <span className="flex items-center gap-2">
-             <Logo size={28} colorLeft="#374151" colorRight="#111827" />RED PRODUCT
+            <Logo size={28} variant="light" /> RED PRODUCT
             </span>
             <button className="md:hidden text-gray-400" onClick={() => setSidebarOpen(false)}>
               <X size={28} />
