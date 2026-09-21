@@ -47,7 +47,7 @@ export default function Login() {
         <form onSubmit={handleSubmit} className="space-y-5">
           <input type="email" placeholder="E-mail" value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full border-b border-gray-300 focus:border-gray-800 outline-none py-2 text-sm" required />
+            className="w-full border-0 border-b border-gray-300 focus:border-gray-800 outline-none py-2 text-sm" required />
           <input type="password" placeholder="Mot de passe" value={password}
             onChange={(e) => setPassword(e.target.value)}
             className="w-full border-b border-gray-300 focus:border-gray-800 outline-none py-2 text-sm" required />

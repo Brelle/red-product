@@ -56,7 +56,7 @@ export default function Signup() {
             placeholder="Nom"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="w-full border-b border-gray-300 outline-none py-2 text-sm"
+            className="w-full border-0 border-b border-gray-300 outline-none py-2 text-sm"
             required
           />
           <input
@@ -64,7 +64,7 @@ export default function Signup() {
             placeholder="E-mail"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full border-b border-gray-300 outline-none py-2 text-sm"
+            className="w-full border-0 border-b border-gray-300 outline-none py-2 text-sm"
             required
           />
           <input
@@ -72,7 +72,7 @@ export default function Signup() {
             placeholder="Mot de passe"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full border-b border-gray-300 outline-none py-2 text-sm"
+            className="w-full border-0 border-b border-gray-300 outline-none py-2 text-sm"
             required
           />
           <label className="flex items-center gap-2 text-sm text-gray-500">
