@@ -53,9 +53,9 @@ export default function HotelList() {
   if (showForm) {
     return (
       <div className="bg-white rounded-lg p-6 max-w-3xl">
-        <button onClick={() => setShowForm(false)} className="flex items-center gap-2 text-sm text-gray-500 mb-4">
-          <ArrowLeft size={16} /> Créer un nouvel hôtel
-        </button>
+        <button onClick={() => setShowForm(false)} className="flex items-center gap-2 text-xs font-semibold tracking-wider uppercase text-gray-500 mb-4 pb-4 border-b border-dashed border-gray-300 w-full">
+  <ArrowLeft size={16} /> Créer un nouvel hôtel
+</button>
         <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-x-6 gap-y-4">
           <div>
             <label className="text-sm text-gray-500">Nom de l'hôtel</label>

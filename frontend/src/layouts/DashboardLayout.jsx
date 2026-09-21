@@ -8,6 +8,7 @@ const DEFAULT_PHOTO = 'https://images.unsplash.com/photo-1534528741775-53994a69d
 
 export default function DashboardLayout() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const location = useLocation()
   const [photo, setPhoto] = useState(DEFAULT_PHOTO)
   const [uploading, setUploading] = useState(false)
   const fileInputRef = useRef(null)
@@ -134,7 +135,9 @@ export default function DashboardLayout() {
             <button className="md:hidden text-gray-600" onClick={() => setSidebarOpen(true)}>
               <Menu size={22} />
             </button>
-            <h1 className="text-lg md:text-xl font-bold text-gray-800">Dashboard</h1>
+            <h1 className="text-lg md:text-xl font-bold text-gray-800">
+  {location.pathname === '/hotels' ? 'Liste des hôtels' : 'Dashboard'}
+</h1>
           </div>
           <div className="flex items-center gap-3 md:gap-6">
             <div className="hidden sm:flex items-center gap-2 text-gray-400 bg-gray-100 rounded-full px-4 py-2 w-40 md:w-72 focus-within:ring-2 focus-within:ring-gray-300">
