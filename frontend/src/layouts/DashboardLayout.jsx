@@ -67,7 +67,8 @@ export default function DashboardLayout() {
 
       {/* Sidebar */}
       <aside
-        className={`w-64 bg-[#2b2f38] text-gray-300 flex flex-col justify-between fixed md:static inset-y-0 left-0 z-40 transform transition-transform duration-300 ${
+        style={{ backgroundImage: "linear-gradient(rgba(43, 47, 56, 0.92), rgba(43, 47, 56, 0.92)), url('https://res.cloudinary.com/gwhpv6xz/image/upload/v1787306185/94c992138e12276ca66f489ef860cd3e376efe77.jpg')", backgroundSize: 'cover', backgroundPosition: 'center' }}
+className={`w-64 text-gray-300 flex flex-col justify-between fixed md:static inset-y-0 left-0 z-40 transform transition-transform duration-300 ${
           sidebarOpen ? 'translate-x-0' : '-translate-x-full'
         } md:translate-x-0`}
       >
