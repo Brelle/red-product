@@ -1,49 +1,103 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import toast from 'react-hot-toast'
 import Logo from '../components/Logo'
 import api from '../api/axios'
 
-export default function ForgotPassword() {
+export default function Signup() {
+  const [name, setName] = useState('')
   const [email, setEmail] = useState('')
-  const [message, setMessage] = useState('')
+  const [password, setPassword] = useState('')
+  const [accepted, setAccepted] = useState(false)
+  const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
+  const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    setError('')
+
+    if (!accepted) {
+      setError('Merci d\'accepter les termes et la politique.')
+      return
+    }
+
     setLoading(true)
-    setMessage('')
+    const loadingToast = toast.loading('Création du compte...')
     try {
-      await api.post('password-reset/', { email })
-      setMessage('Si ce compte existe, un email a été envoyé.')
+      await api.post('register/', { name, email, password })
+      toast.success('Compte créé avec succès !', { id: loadingToast })
+      navigate('/')
     } catch (err) {
-      setMessage('Une erreur est survenue. Réessayez.')
+      const message = err.response?.data?.detail || 'Erreur lors de la création du compte.'
+      setError(message)
+      toast.error(message, { id: loadingToast })
     } finally {
       setLoading(false)
     }
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 bg-cover bg-center" style={{ backgroundImage: "linear-gradient(rgba(20, 22, 28, 0.75), rgba(20, 22, 28, 0.75)), url('https://res.cloudinary.com/gwhpv6xz/image/upload/v1787306185/94c992138e12276ca66f489ef860cd3e376efe77.jpg')" }}>
+     <div
+     className="min-h-screen flex flex-col items-center justify-center px-4 bg-cover bg-center"
+     style={{
+    backgroundImage: "linear-gradient(rgba(20, 22, 28, 0.75), rgba(20, 22, 28, 0.75)), url('https://res.cloudinary.com/gwhpv6xz/image/upload/v1787306185/94c992138e12276ca66f489ef860cd3e376efe77.jpg')"
+     }}
+     >
+      <div className="flex items-center gap-3 mb-6 text-white font-semibold text-lg tracking-wide">
+        <Logo size={28} variant="light" /> RED PRODUCT
+      </div>
       <div className="bg-white rounded-lg shadow-lg w-full max-w-sm p-8">
-        <div className="flex items-center gap-3 justify-center mb-8 font-semibold text-lg tracking-wide">
-          <Logo size={28} variant="light" /> RED PRODUCT
-        </div>
-        <p className="font-medium mb-1">Mot de passe oublié?</p>
-        <p className="text-sm text-gray-500 mb-6">Entrez votre adresse e-mail et nous vous enverrons les instructions.</p>
-        {message && <p className="text-sm text-green-600 mb-4">{message}</p>}
+        <p className="text-sm text-gray-500 mb-6">Inscrivez-vous en tant qu'Admin</p>
+        {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
         <form onSubmit={handleSubmit} className="space-y-5">
-          <input type="email" placeholder="Votre e-mail" value={email}
+          <input
+            type="text"
+            placeholder="Nom"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            className="w-full border-0 border-b border-gray-300 outline-none py-2 text-sm"
+            required
+          />
+          <input
+            type="email"
+            placeholder="E-mail"
+            value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full border-0 border-b border-gray-300 outline-none py-2 text-sm" required />
-          <button type="submit" disabled={loading}
-            className="w-full bg-[#2b2f38] text-white py-2.5 rounded-md text-sm font-medium disabled:opacity-50">
-            {loading ? 'Envoi...' : 'Envoyer'}
+            className="w-full border-0 border-b border-gray-300 outline-none py-2 text-sm"
+            required
+          />
+          <input
+            type="password"
+            placeholder="Mot de passe"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="w-full border-0 border-b border-gray-300 outline-none py-2 text-sm"
+            required
+          />
+          <label className="flex items-center gap-2 text-sm text-gray-500">
+            <input
+              type="checkbox"
+              checked={accepted}
+              onChange={(e) => setAccepted(e.target.checked)}
+            />
+            Accepter les termes et la politique
+          </label>
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full bg-[#2b2f38] text-white py-2.5 rounded-md text-sm font-medium disabled:opacity-60 flex items-center justify-center gap-2"
+          >
+            {loading && (
+              <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+            )}
+            {loading ? 'Création en cours...' : "S'inscrire"}
           </button>
         </form>
-        <p className="text-center text-sm mt-4 text-gray-500">
-          Revenir à la <Link to="/" className="text-yellow-600">connexion</Link>
-        </p>
       </div>
+      <p className="text-center text-sm mt-4 text-gray-300">
+        Vous avez déjà un compte ? <Link to="/" className="text-yellow-500 font-medium">Se connecter</Link>
+      </p>
     </div>
   )
 }

@@ -23,11 +23,11 @@ export default function ForgotPassword() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 bg-cover bg-center" style={{ backgroundImage: "linear-gradient(rgba(20, 22, 28, 0.75), rgba(20, 22, 28, 0.75)), url('https://res.cloudinary.com/gwhpv6xz/image/upload/v1787306185/94c992138e12276ca66f489ef860cd3e376efe77.jpg')" }}>
+    <div className="min-h-screen flex flex-col items-center justify-center px-4 bg-cover bg-center" style={{ backgroundImage: "linear-gradient(rgba(20, 22, 28, 0.75), rgba(20, 22, 28, 0.75)), url('https://res.cloudinary.com/gwhpv6xz/image/upload/v1787306185/94c992138e12276ca66f489ef860cd3e376efe77.jpg')" }}>
+      <div className="flex items-center gap-3 mb-6 text-white font-semibold text-lg tracking-wide">
+        <Logo size={28} variant="light" /> RED PRODUCT
+      </div>
       <div className="bg-white rounded-lg shadow-lg w-full max-w-sm p-8">
-        <div className="flex items-center gap-3 justify-center mb-8 font-semibold text-lg tracking-wide">
-          <Logo size={28} variant="light" /> RED PRODUCT
-        </div>
         <p className="font-medium mb-1">Mot de passe oublié?</p>
         <p className="text-sm text-gray-500 mb-6">Entrez votre adresse e-mail et nous vous enverrons les instructions.</p>
         {message && <p className="text-sm text-green-600 mb-4">{message}</p>}
@@ -40,10 +40,10 @@ export default function ForgotPassword() {
             {loading ? 'Envoi...' : 'Envoyer'}
           </button>
         </form>
-        <p className="text-center text-sm mt-4 text-gray-500">
-          Revenir à la <Link to="/" className="text-yellow-600">connexion</Link>
-        </p>
       </div>
+      <p className="text-center text-sm mt-4 text-gray-300">
+        Revenir à la <Link to="/" className="text-yellow-500 font-medium">connexion</Link>
+      </p>
     </div>
   )
 }
